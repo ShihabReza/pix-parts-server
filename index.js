@@ -30,6 +30,13 @@ async function run() {
             res.send(revew)
       })
 
+      app.post('/revew',async(req, res) => {
+          const newRevew = req.body
+          const result = revewCollection.insertOne(newRevew)
+          res.send(result)
+          
+      })
+
 
       app.get('/product/:id',async(req, res)=>{
         const id = req.params.id
