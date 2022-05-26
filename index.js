@@ -16,6 +16,7 @@ async function run() {
     try {
       await client.connect();
       const productCollection = client.db('pix_parts').collection('products');
+      
       app.get('/product',async(req, res) => {
             const query = {}
             const cursor = productCollection.find(query)
@@ -50,6 +51,15 @@ async function run() {
         const newProduct = req.body;
         const result = await productCollection.insertOne(newProduct)
         res.send(result)
+      })
+
+      ;
+      app.post('/booking',async (req, res)=>{
+        const booking = req.body;
+       
+        const result = await bookingCollection.insertOne(booking)
+        res.send(result)
+
       })
     } finally {
      
