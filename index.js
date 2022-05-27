@@ -16,6 +16,7 @@ async function run() {
     try {
       await client.connect();
       const productCollection = client.db('pix_parts').collection('products');
+      const bookingCollection = client.db('pix_parts').collection('booking');
       
       app.get('/product',async(req, res) => {
             const query = {}
@@ -53,12 +54,18 @@ async function run() {
         res.send(result)
       })
 
-      ;
+      app.get('/booking',async (req, res) => {
+        const email = req.query.email;
+        const query = {email: email}
+        const bookings = await bookingCollection.find(query).toArray()
+        res.send(bookings)
+      })
+
       app.post('/booking',async (req, res)=>{
         const booking = req.body;
        
         const result = await bookingCollection.insertOne(booking)
-        res.send(result)
+       return res.send({success: true,result})
 
       })
     } finally {
