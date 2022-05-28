@@ -75,7 +75,7 @@ async function run() {
   run().catch(console.dir);
 
 app.get('/', (req, res) => {
-  res.send('pic-parts-server updete Node ')
+  res.send('pic-parts-server updete Node mongo')
 })
 
 app.listen(port, () => {
